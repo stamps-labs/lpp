@@ -76,10 +76,11 @@ def solve_lpp(n, m, c, A, b, task='min'):
             new_c[col] = c[col] - c[leading_column] * new_A[leading_row][col]
 
         # replace old A, b and c with new ones and go to next iteration.
+        
+        c_b[leading_row] = c[leading_column]
         A = new_A
         b = new_b
         c = new_c
-        c_b[leading_row] = c[leading_column]
         basis[leading_row] = leading_column
 
 
@@ -107,6 +108,8 @@ def main():
         else: 
             print("Maxima: ", round(optima, precision))
         print("Solution: ", [round(elem, precision) for elem in solution])
+    else: 
+        print("No solution found")
 
 
 if __name__ == '__main__':
