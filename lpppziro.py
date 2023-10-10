@@ -18,6 +18,22 @@ assert len(b) == m, "The length of vector of right-hand side numbers must be equ
 precision = int(input("Enter the approximation accuracy (number of decimal digits): "))
 if task == "min":
     c = [-1 * x for x in c]
+if not(all(val >= 0 for val in b)):
+    print("Vector b contains non-positive values the method is not applicable.")
+    exit()
+
+# Extract the last m rows by m columns of matrix A
+identity_matrix = [[1 if i == j else 0 for j in range(m)] for i in range(m)]
+last_m_rows_m_columns = [row[-m:] for row in A[-m:]]
+# last_m_rows_m_columns = [row[-m:] for row in A[-m:]]
+# print(identity_matrix)
+# print(last_m_rows_m_columns)
+# Check if the extracted matrix is an identity matrix
+if last_m_rows_m_columns != identity_matrix:
+    print(f"The last {m} rows by {m} columns in matrix A do not form an identity matrix the method is not applicable.")
+    exit()
+
+
 
 def create_table(c, A, b):
     xb = [eq + [x] for eq, x in zip(A, b)]
